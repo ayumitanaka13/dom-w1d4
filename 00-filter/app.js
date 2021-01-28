@@ -1,10 +1,17 @@
 //get result element
+const result = document.querySelector("#result"); 
 //get input filter element
+const filter = document.querySelector("#filter"); 
 //define an array variable
+const listItems = [];
 
 //add an event listener to filter element
 filter.addEventListener('input', function(e){
-    // filterData(e.???.???);
+    filterData(e.target.value.toLowerCase());
+})
+
+filter.addEventListener('submit', function(e){
+    e.preventDefault();
 })
 
 getData();
@@ -23,15 +30,39 @@ async function getData() {
         //p -- any info you wanna put
     // </div
 
+    for (const r of results) {
+        const li = document.createElement('li');
+        const img = document.createElement('img');
+        const div = document.createElement('div');
+        const h4 = document.createElement('h4');
+        const p = document.createElement('p');
+                
+        result.appendChild(li);
+        li.appendChild(img);
+        li.appendChild(div);
+        div.appendChild(h4);
+        div.appendChild(p);
+        
+        div.id = 'user-info';
+        img.src = `${r.picture.thumbnail}`; 
+        h4.innerText = `${r.name.first} ${r.name.last}`;
+        p.innerText = `${r.location.city}`;
+
+        listItems.push(li);
+    }
 }
 
 function filterData(searchTerm) {
     listItems.forEach(item => {
+        const search = item.innerText.toLowerCase();
+
         /* add conditional logic below */
-        if() {
+        if(search.includes(searchTerm)) {
             //remove the class of .hide
+            item.classList.remove('hide');
         } else {
             //add the class of .hide
+            item.classList.add('hide');
         }
     })
 }
