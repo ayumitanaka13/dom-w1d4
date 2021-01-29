@@ -29,33 +29,40 @@ async function getData() {
         //h4 --- name
         //p -- any info you wanna put
     // </div
-
     for (const r of results) {
         const li = document.createElement('li');
-        const img = document.createElement('img');
-        const div = document.createElement('div');
-        const h4 = document.createElement('h4');
-        const p = document.createElement('p');
+        // const img = document.createElement('img');
+        // const div = document.createElement('div');
+        // const h4 = document.createElement('h4');
+        // const p = document.createElement('p');
                 
         result.appendChild(li);
-        li.appendChild(img);
-        li.appendChild(div);
-        div.appendChild(h4);
-        div.appendChild(p);
+        // li.appendChild(img);
+        // li.appendChild(div);
+        // div.appendChild(h4);
+        // div.appendChild(p);
         
-        div.id = 'user-info';
-        img.src = `${r.picture.thumbnail}`; 
-        h4.innerText = `${r.name.first} ${r.name.last}`;
-        p.innerText = `${r.location.city}`;
+        // div.classList.add('user-info');
+        // img.src = `${r.picture.thumbnail}`; 
+        // h4.innerText = `${r.name.first} ${r.name.last}`;
+        // p.innerText = `${r.location.city}, ${r.location.country}`;
 
         listItems.push(li);
+
+        //another solution
+        li.innerHTML = `
+            <img src="${r.picture.thumbnail}" alt="${r.name.first}" />
+            <div class="user-info">
+                <h4>${r.name.first} ${r.name.last}</h4>
+                <p>${r.location.city}, ${r.location.country}</p>
+            </div>
+        `;
     }
 }
 
 function filterData(searchTerm) {
     listItems.forEach(item => {
         const search = item.innerText.toLowerCase();
-
         /* add conditional logic below */
         if(search.includes(searchTerm)) {
             //remove the class of .hide
